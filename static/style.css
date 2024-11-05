@@ -42,4 +42,4 @@ button:hover {
     list-style-type: none;
     padding: 0;
 }
-<link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+
