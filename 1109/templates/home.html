@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>健康監測器主頁</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- 健康監測器標題，背景綠色，字體白色 -->
+        <h1 class="header-title">健康監測器</h1>
+
+        <!-- 添加分隔線的段落 -->
+        <p class="intro-text border">
+            歡迎使用健康監測器！<br>
+            輕鬆追蹤血糖、血壓、BMI等健康指標，並獲得專業建議，讓您隨時了解身體狀況。立即開始記錄，保持健康，掌握生活！
+        </p>
+
+        <!-- 按鈕，跳轉到輸入基本資訊頁面 -->
+        <a href="{{ url_for('input_info') }}" class="button">輸入基本資訊</a>
+    </div>
+</body>
+</html>
