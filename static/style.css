@@ -9,7 +9,7 @@ body {
 
 .container {
     width: 100%;
-    max-width: 400px;
+    max-width: 600px;
     text-align: center;
 }
 
@@ -43,3 +43,7 @@ button:hover {
     padding: 0;
 }
 
+.flexbox {
+    display: flex;
+    margin: 10px 0;
+}

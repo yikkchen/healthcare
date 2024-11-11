@@ -3,7 +3,7 @@ from flask import Flask, render_template, request
 app = Flask(__name__)
 
 # 設定健康建議的函數
-def get_health_advice(blood_pressure, blood_sugar, bmi):
+def get_health_advice(blood_pressure, blood_sugar, height, weight):
     advice = []
     if type(blood_pressure) is float:
         if blood_pressure > 130:
@@ -23,25 +23,27 @@ def get_health_advice(blood_pressure, blood_sugar, bmi):
             advice.append("Your blood sugar is normal. Keep it up!!!")
     else:
         advice.append("No blood_sugar data")
-    if type(bmi) is float:
+    if type(weight) is float and type(height):
+        bmi = round(weight / (height / 100)**2, 2)
         if bmi > 25:
-            advice.append("Your BMI is above the normal range. Regular exercise and a balanced diet can help.")
+            advice.append("Your bmi is " + str(bmi) + ", Your BMI is above the normal range. Regular exercise and a balanced diet can help.")
         elif bmi < 18.5:
-            advice.append("Your BMI is below the normal range. you should eat more food")
+            advice.append("Your bmi is " + str(bmi) + ", Your BMI is below the normal range. you should eat more food")
         else:
-            advice.append("Your BMI is normal range. Keep it up!!!")
+            advice.append("Your bmi is " + str(bmi) + ", Your BMI is normal range. Keep it up!!!")
     else:
-        advice.append("No bmi data")
-
-    if not advice:
-        advice.append("Your health metrics are within the normal range. Keep up the good work!")
+        advice.append("not enough data to calulate your bmi")
 
     return advice
 
 # 主頁面路由
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    health_advice = None
+    return render_template('index.html')
+
+# 主頁面路由
+@app.route('/result', methods=['GET', 'POST'])
+def result():
     #type(request.form.get('blood_pressure')) is str
     if request.method == 'POST':
         if request.form.get('blood_pressure') != '':
@@ -52,15 +54,17 @@ def index():
             blood_sugar = float(request.form.get('blood_sugar'))
         else:
             blood_sugar = "NaN"
-        if request.form.get('bmi') != '':
-            bmi = float(request.form.get('bmi'))
+        if request.form.get('height') != '':
+            height = float(request.form.get('height'))
         else:
-            bmi = "NaN"
-        
-        # 取得健康建議
-        health_advice = get_health_advice(blood_pressure, blood_sugar, bmi)
-        
-    return render_template('index.html', health_advice=health_advice)
+            height = "NaN"
+        if request.form.get('weight') != '':
+            weight = float(request.form.get('weight'))
+        else:
+            weight = "NaN"
+    # 取得健康建議
+    health_advice = get_health_advice(blood_pressure, blood_sugar, height, weight)
+    return render_template('result.html', health_advice=health_advice)
 
 if __name__ == '__main__':
     app.run(debug=True)

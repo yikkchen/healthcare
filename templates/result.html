@@ -1,0 +1,22 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Monitor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        {% if health_advice %}
+        <div class="advice">
+        <h2>Health Advice:</h2>
+            <ul>
+                {% for advice in health_advice %}
+                <li>{{ advice }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+    </div>
+</body>
+</html>
