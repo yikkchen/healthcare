@@ -4,67 +4,79 @@ app = Flask(__name__)
 
 # 設定健康建議的函數
 def get_health_advice(blood_pressure, blood_sugar, height, weight):
-    advice = []
-    if type(blood_pressure) is float:
+    # 將建議按健康指標分成字典形式
+    fontLargestStrong = {'blood_pressure': [], 'blood_sugar': [], 'bmi': []}
+    fontSecondStrong = {'blood_pressure': [], 'blood_sugar': [], 'bmi': []}
+    fontNormalStrong = {'blood_pressure': [], 'blood_sugar': [], 'bmi': []}
+    fontNormal = {'blood_pressure': [], 'blood_sugar': [], 'bmi': []}
+    
+    # 血壓建議
+    if isinstance(blood_pressure, float):
         if blood_pressure > 130:
-            advice.append("Your blood pressure is high. Consider reducing salt intake and managing stress.")
+            fontSecondStrong['blood_pressure'].append("高血壓症狀：")
+            fontSecondStrong['blood_pressure'].append("高血壓發病原因：")
+            fontLargestStrong['blood_pressure'].append("Your blood pressure is high. Consider reducing salt intake and managing stress.")
+            fontNormalStrong['blood_pressure'].append("1. 遺傳(多基因型)")
+            fontNormalStrong['blood_pressure'].append("2. 環境因素")
         elif blood_pressure < 90:
-            advice.append("Your blood pressure is Low. Consider incresing salt intake and managing stress.")
+            fontSecondStrong['blood_pressure'].append("低血壓症狀：")
+            fontSecondStrong['blood_pressure'].append("低血壓發病原因：")
+            fontLargestStrong['blood_pressure'].append("Your blood pressure is low. Consider increasing salt intake and managing stress.")
         else:
-            advice.append("Your blood pressure is normal. Keep it up!!!")
+            fontSecondStrong['blood_pressure'].append("正常：")
+            fontLargestStrong['blood_pressure'].append("Your blood pressure is normal. Keep it up!")
     else:
-        advice.append("No bloood_pressure data")
-    if type(blood_sugar) is float:
-        if blood_sugar > 140:
-            advice.append("Your blood sugar is high. Monitor your sugar intake and consider a low-sugar diet.")
-        elif blood_sugar < 70:
-            advice.append("Your blood sugar is low. Monitor your sugar intake and consider a high-sugar diet.")
-        else:
-            advice.append("Your blood sugar is normal. Keep it up!!!")
-    else:
-        advice.append("No blood_sugar data")
-    if type(weight) is float and type(height):
-        bmi = round(weight / (height / 100)**2, 2)
-        if bmi > 25:
-            advice.append("Your bmi is " + str(bmi) + ", Your BMI is above the normal range. Regular exercise and a balanced diet can help.")
-        elif bmi < 18.5:
-            advice.append("Your bmi is " + str(bmi) + ", Your BMI is below the normal range. you should eat more food")
-        else:
-            advice.append("Your bmi is " + str(bmi) + ", Your BMI is normal range. Keep it up!!!")
-    else:
-        advice.append("not enough data to calulate your bmi")
+        fontLargestStrong['blood_pressure'].append("No blood pressure data")
 
-    return advice
+    # 血糖建議
+    if isinstance(blood_sugar, float):
+        if blood_sugar > 140:
+            fontLargestStrong['blood_sugar'].append("Your blood sugar is high. Monitor your sugar intake and consider a low-sugar diet.")
+        elif blood_sugar < 70:
+            fontLargestStrong['blood_sugar'].append("Your blood sugar is low. Consider a high-sugar diet.")
+        else:
+            fontLargestStrong['blood_sugar'].append("Your blood sugar is normal. Keep it up!")
+    else:
+        fontLargestStrong['blood_sugar'].append("No blood sugar data")
+
+    # BMI 建議
+    if isinstance(weight, float) and isinstance(height, float):
+        bmi = round(weight / (height / 100) ** 2, 2)
+        if bmi > 25:
+            fontLargestStrong['bmi'].append(f"Your BMI is {bmi}. It's above the normal range. Regular exercise and a balanced diet can help.")
+        elif bmi < 18.5:
+            fontLargestStrong['bmi'].append(f"Your BMI is {bmi}. It's below the normal range. You should eat more.")
+        else:
+            fontLargestStrong['bmi'].append(f"Your BMI is {bmi}. It's within the normal range. Keep it up!")
+    else:
+        fontLargestStrong['bmi'].append("Not enough data to calculate your BMI")
+
+    return fontLargestStrong, fontSecondStrong, fontNormalStrong, fontNormal
 
 # 主頁面路由
 @app.route('/', methods=['GET', 'POST'])
 def index():
     return render_template('index.html')
 
-# 主頁面路由
-@app.route('/result', methods=['GET', 'POST'])
+# 結果頁面路由
+@app.route('/result', methods=['POST'])
 def result():
-    #type(request.form.get('blood_pressure')) is str
-    if request.method == 'POST':
-        if request.form.get('blood_pressure') != '':
-            blood_pressure = float(request.form.get('blood_pressure'))
-        else:
-            blood_pressure = "NaN"
-        if request.form.get('blood_sugar') != '':
-            blood_sugar = float(request.form.get('blood_sugar'))
-        else:
-            blood_sugar = "NaN"
-        if request.form.get('height') != '':
-            height = float(request.form.get('height'))
-        else:
-            height = "NaN"
-        if request.form.get('weight') != '':
-            weight = float(request.form.get('weight'))
-        else:
-            weight = "NaN"
+    # 取得表單數據
+    blood_pressure = float(request.form.get('blood_pressure')) if request.form.get('blood_pressure') else None
+    blood_sugar = float(request.form.get('blood_sugar')) if request.form.get('blood_sugar') else None
+    height = float(request.form.get('height')) if request.form.get('height') else None
+    weight = float(request.form.get('weight')) if request.form.get('weight') else None
+
     # 取得健康建議
-    health_advice = get_health_advice(blood_pressure, blood_sugar, height, weight)
-    return render_template('result.html', health_advice=health_advice)
+    fontLargestStrong, fontSecondStrong, fontNormalStrong, fontNormal = get_health_advice(blood_pressure, blood_sugar, height, weight)
+
+    return render_template(
+        'result.html',
+        fontLargestStrong=fontLargestStrong,
+        fontSecondStrong=fontSecondStrong,
+        fontNormalStrong=fontNormalStrong,
+        fontNormal=fontNormal
+    )
 
 if __name__ == '__main__':
     app.run(debug=True)

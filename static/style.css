@@ -47,3 +47,28 @@ button:hover {
     display: flex;
     margin: 10px 0;
 }
+
+.advice h2 {
+    color: #333;
+}
+
+.font-largest-strong li {
+    font-size: 1.2em;
+    color: #b22222; /* 深红色 */
+}
+
+.font-second-strong li {
+    font-size: 1.1em;
+    color: #ff4500; /* 橙红色 */
+}
+
+.font-normal-strong li {
+    font-size: 1em;
+    color: #2e8b57; /* 绿色 */
+    font-style: italic;
+}
+
+.font-normal li {
+    font-size: 0.9em;
+    color: #333;
+}
