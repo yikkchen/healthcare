@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Health Monitor Results</title>
+    <title>Health Monitor</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <style>
         .back-home {
@@ -30,9 +30,6 @@
         <!-- 血壓建議 -->
         <div class="advice-section">
             <h2>Blood Pressure:</h2>
-<<<<<<< HEAD
-            <p>{{ blood_pressure }} mmHg</p>
-=======
             {% if fontLargestStrong.blood_pressure or fontSecondStrong.blood_pressure or fontNormalStrong.blood_pressure or fontNormal.blood_pressure %}
                 <div class="advice">
                     <!-- 建議列表 -->
@@ -43,15 +40,11 @@
                     </ul>
                 </div>
             {% endif %}
->>>>>>> f245527b401e0406825502f19de3c5051df12817
         </div>
 
         <!-- 血糖建議 -->
         <div class="advice-section">
             <h2>Blood Sugar:</h2>
-<<<<<<< HEAD
-            <p>{{ blood_sugar }} mg/dL</p>
-=======
             {% if fontLargestStrong.blood_sugar or fontSecondStrong.blood_sugar or fontNormalStrong.blood_sugar or fontNormal.blood_sugar %}
                 <div class="advice">
                     <!-- 建議列表 -->
@@ -69,16 +62,11 @@
                     {% endif %}
                 </div>
             {% endif %}
->>>>>>> f245527b401e0406825502f19de3c5051df12817
         </div>
 
         <!-- BMI 建議 -->
         <div class="advice-section">
             <h2>BMI:</h2>
-<<<<<<< HEAD
-            <p>{{ bmi }} kg/m² - {{ bmi_advice }}</p>
-        </div>
-=======
             {% if fontLargestStrong.bmi or fontSecondStrong.bmi or fontNormalStrong.bmi or fontNormal.bmi %}
                 <div class="advice">
                     <!-- 建議列表 -->
@@ -95,8 +83,6 @@
         <div class="back-home">
             <a href="{{ url_for('index') }}">返回主頁</a>
         </div>
->>>>>>> f245527b401e0406825502f19de3c5051df12817
     </div>
 </body>
 </html>
-
