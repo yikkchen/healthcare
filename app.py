@@ -31,9 +31,26 @@ def get_health_advice(blood_pressure, blood_sugar, height, weight):
     # 血糖建議
     if isinstance(blood_sugar, float):
         if blood_sugar > 140:
-            fontLargestStrong['blood_sugar'].append("Your blood sugar is high. Monitor your sugar intake and consider a low-sugar diet.")
+            fontLargestStrong['blood_sugar'].append("！注意！你的血糖高於正常範圍")
+            fontLargestStrong['blood_sugar'].append("正常情況下，你的血糖應該為：")
+            fontLargestStrong['blood_sugar'].append("空腹血糖：70~100mg/dL")
+            fontLargestStrong['blood_sugar'].append("飯後兩小時血糖：70~140mg/dL")
+            fontLargestStrong['blood_sugar'].append("！改善！")
+            fontLargestStrong['blood_sugar'].append("避免吃高升糖指數的食物，選擇 GI 值低於 55 的低升糖指數食物，例如：糙米、燕麥、山藥、大部分蔬菜、豆魚蛋肉類、小番茄、芭樂、木瓜等。")
+            fontLargestStrong['blood_sugar'].append("避免吃含精緻糖的食物，像是冰糖、砂糖、高果糖漿等精製糖，避免食用麵包、冰淇淋、甜甜圈等含精緻糖的食物。")
+            fontLargestStrong['blood_sugar'].append("避免吃高油脂食物，選擇植物油來替代動物性脂肪（如：豬油、牛油、奶油、培根等）。")
+            fontLargestStrong['blood_sugar'].append("避免吃高鈉食物，並避免過度飲酒。")
         elif blood_sugar < 70:
-            fontLargestStrong['blood_sugar'].append("Your blood sugar is low. Consider a high-sugar diet.")
+            fontLargestStrong['blood_sugar'].append("！注意！你的血糖低於正常範圍")
+            fontLargestStrong['blood_sugar'].append("正常情況下，你的血糖應該為：")
+            fontLargestStrong['blood_sugar'].append("空腹血糖：70~100mg/dL")
+            fontLargestStrong['blood_sugar'].append("飯後兩小時血糖：70~140mg/dL")
+            fontLargestStrong['blood_sugar'].append("請注意您身理上是否有虛弱、嗜睡、飢餓、臉色蒼白、冒冷汗、心跳加快、發冷、抽筋、頭暈等症狀；心理上可能會有情緒改變及行為改變。")
+            fontLargestStrong['blood_sugar'].append("！改善！造成低血糖的原因有：")
+            fontLargestStrong['blood_sugar'].append("藥物：自行調整藥物劑量不正確、用藥時間不規律等。")
+            fontLargestStrong['blood_sugar'].append("飲食：三餐不定時、用藥後未進食等。")
+            fontLargestStrong['blood_sugar'].append("運動：空腹運動、過度運動等。")
+            fontLargestStrong['blood_sugar'].append("如果長時間處於低血糖狀態，建議就醫。")
         else:
             fontLargestStrong['blood_sugar'].append("Your blood sugar is normal. Keep it up!")
     else:
@@ -77,6 +94,12 @@ def result():
         fontNormalStrong=fontNormalStrong,
         fontNormal=fontNormal
     )
+
+# 新增 GI 值介紹頁面的路由
+@app.route('/GI')
+def GI():
+    return render_template('GI.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
