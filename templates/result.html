@@ -5,28 +5,97 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Health Monitor Results</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .back-home {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .back-home a {
+            text-decoration: none;
+            color: white;
+            background-color: #4CAF50;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1.2em;
+        }
+        .back-home a:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
         <h1>Health Monitor Results</h1>
 
-        <!-- Blood Pressure Section -->
+        <!-- 血壓建議 -->
         <div class="advice-section">
             <h2>Blood Pressure:</h2>
+<<<<<<< HEAD
             <p>{{ blood_pressure }} mmHg</p>
+=======
+            {% if fontLargestStrong.blood_pressure or fontSecondStrong.blood_pressure or fontNormalStrong.blood_pressure or fontNormal.blood_pressure %}
+                <div class="advice">
+                    <!-- 建議列表 -->
+                    <ul class="font-largest-strong">
+                        {% for advice in fontLargestStrong.blood_pressure %}
+                            <li><strong>{{ advice }}</strong></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+>>>>>>> f245527b401e0406825502f19de3c5051df12817
         </div>
 
-        <!-- Blood Sugar Section -->
+        <!-- 血糖建議 -->
         <div class="advice-section">
             <h2>Blood Sugar:</h2>
+<<<<<<< HEAD
             <p>{{ blood_sugar }} mg/dL</p>
+=======
+            {% if fontLargestStrong.blood_sugar or fontSecondStrong.blood_sugar or fontNormalStrong.blood_sugar or fontNormal.blood_sugar %}
+                <div class="advice">
+                    <!-- 建議列表 -->
+                    <ul class="font-largest-strong">
+                        {% for advice in fontLargestStrong.blood_sugar %}
+                            <li><strong>{{ advice }}</strong></li>
+                        {% endfor %}
+                    </ul>
+                    
+                    <!-- 加入了解 GI 值的按鈕 -->
+                    {% if '！注意！你的血糖高於正常範圍' in fontLargestStrong.blood_sugar[0] %}
+                        <div class="gi-link">
+                            <a href="{{ url_for('GI') }}" class="btn btn-info">點我了解GI值</a>
+                        </div>
+                    {% endif %}
+                </div>
+            {% endif %}
+>>>>>>> f245527b401e0406825502f19de3c5051df12817
         </div>
 
-        <!-- BMI Section -->
+        <!-- BMI 建議 -->
         <div class="advice-section">
             <h2>BMI:</h2>
+<<<<<<< HEAD
             <p>{{ bmi }} kg/m² - {{ bmi_advice }}</p>
         </div>
+=======
+            {% if fontLargestStrong.bmi or fontSecondStrong.bmi or fontNormalStrong.bmi or fontNormal.bmi %}
+                <div class="advice">
+                    <!-- 建議列表 -->
+                    <ul class="font-largest-strong">
+                        {% for advice in fontLargestStrong.bmi %}
+                            <li><strong>{{ advice }}</strong></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- 回主頁按鈕 -->
+        <div class="back-home">
+            <a href="{{ url_for('index') }}">返回主頁</a>
+        </div>
+>>>>>>> f245527b401e0406825502f19de3c5051df12817
     </div>
 </body>
 </html>
