@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Health Monitor</title>
+    <title>Health Monitor Results</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
@@ -13,111 +13,21 @@
         <!-- Blood Pressure Section -->
         <div class="advice-section">
             <h2>Blood Pressure:</h2>
-            {% if fontLargestStrong.blood_pressure or fontSecondStrong.blood_pressure or fontNormalStrong.blood_pressure or fontNormal.blood_pressure %}
-                <div class="advice">
-                    <!-- 最大強度建議 -->
-                    <ul class="font-largest-strong">
-                        {% for advice in fontLargestStrong.blood_pressure %}
-                            <li><strong>{{ advice }}</strong></li>
-                        {% endfor %}
-                    </ul>
-
-                    <!-- 次大強度建議 -->
-                    <ul class="font-second-strong">
-                        {% for advice in fontSecondStrong.blood_pressure %}
-                            <li>{{ advice }}</li>
-                        {% endfor %}
-                    </ul>
-
-                    <!-- 普通強度建議 -->
-                    <ul class="font-normal-strong">
-                        {% for advice in fontNormalStrong.blood_pressure %}
-                            <li><em>{{ advice }}</em></li>
-                        {% endfor %}
-                    </ul>
-
-                    <!-- 正常建議 -->
-                    <ul class="font-normal">
-                        {% for advice in fontNormal.blood_pressure %}
-                            <li>{{ advice }}</li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            {% endif %}
+            <p>{{ blood_pressure }} mmHg</p>
         </div>
 
         <!-- Blood Sugar Section -->
         <div class="advice-section">
             <h2>Blood Sugar:</h2>
-            {% if fontLargestStrong.blood_sugar or fontSecondStrong.blood_sugar or fontNormalStrong.blood_sugar or fontNormal.blood_sugar %}
-                <div class="advice">
-                    <!-- 最大強度建議 -->
-                    <ul class="font-largest-strong">
-                        {% for advice in fontLargestStrong.blood_sugar %}
-                            <li><strong>{{ advice }}</strong></li>
-                        {% endfor %}
-                    </ul>
-
-                    <!-- 次大強度建議 -->
-                    <ul class="font-second-strong">
-                        {% for advice in fontSecondStrong.blood_sugar %}
-                            <li>{{ advice }}</li>
-                        {% endfor %}
-                    </ul>
-
-                    <!-- 普通強度建議 -->
-                    <ul class="font-normal-strong">
-                        {% for advice in fontNormalStrong.blood_sugar %}
-                            <li><em>{{ advice }}</em></li>
-                        {% endfor %}
-                    </ul>
-
-                    <!-- 正常建議 -->
-                    <ul class="font-normal">
-                        {% for advice in fontNormal.blood_sugar %}
-                            <li>{{ advice }}</li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            {% endif %}
+            <p>{{ blood_sugar }} mg/dL</p>
         </div>
 
         <!-- BMI Section -->
         <div class="advice-section">
             <h2>BMI:</h2>
-            {% if fontLargestStrong.bmi or fontSecondStrong.bmi or fontNormalStrong.bmi or fontNormal.bmi %}
-                <div class="advice">
-                    <!-- 最大強度建議 -->
-                    <ul class="font-largest-strong">
-                        {% for advice in fontLargestStrong.bmi %}
-                            <li><strong>{{ advice }}</strong></li>
-                        {% endfor %}
-                    </ul>
-
-                    <!-- 次大強度建議 -->
-                    <ul class="font-second-strong">
-                        {% for advice in fontSecondStrong.bmi %}
-                            <li>{{ advice }}</li>
-                        {% endfor %}
-                    </ul>
-
-                    <!-- 普通強度建議 -->
-                    <ul class="font-normal-strong">
-                        {% for advice in fontNormalStrong.bmi %}
-                            <li><em>{{ advice }}</em></li>
-                        {% endfor %}
-                    </ul>
-
-                    <!-- 正常建議 -->
-                    <ul class="font-normal">
-                        {% for advice in fontNormal.bmi %}
-                            <li>{{ advice }}</li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            {% endif %}
+            <p>{{ bmi }} kg/m² - {{ bmi_advice }}</p>
         </div>
-
     </div>
 </body>
 </html>
+
