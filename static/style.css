@@ -23,19 +23,18 @@ label, input, button {
 }
 
 button {
-    background-color: #4CAF50;
+    background-color: #2A9D8F;
     color: white;
     border: none;
     cursor: pointer;
 }
 
-button:hover {
-    background-color: #45a049;
+button:hover {/*滑鼠停留在button上的顏色*/
+    background-color: #264653;
 }
 
 .advice {
     margin-top: 20px;
-
 }
 
 .advice ul {
@@ -58,17 +57,18 @@ button:hover {
 
 .font-largest-strong li {
     font-size: 1.2em;
-    color: #b22222; /* 深红色 */
+    color: #264653;
 }
 
 .font-second-strong li {
     font-size: 1.1em;
-    color: #ff4500; /* 橙红色 */
+    color: #ffffff;
+    background-color: #264653; /* 設置淺藍色背景 */
 }
 
 .font-normal-strong li {
     font-size: 1em;
-    color: #2e8b57; /* 绿色 */
+    color: #000000; /* 绿色 */
     font-style: italic;
     text-align: left;
 }
