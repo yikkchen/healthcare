@@ -36,10 +36,9 @@ def get_health_advice(blood_pressure_in, blood_pressure_out, blood_sugar, height
             fontNormalStrong['blood_pressure'].append("4.增加鹽分攝取：低血壓患者每天適量攝取約12克左右的食鹽，可改善低血壓症狀。")
             fontNormalStrong['blood_pressure'].append("5.規律運動：運動可調節神經系統、增強心血管功能，進而改善血壓過低問題。")
         else:
-            fontSecondStrong['blood_pressure'].append("正常：")
-            fontLargestStrong['blood_pressure'].append("Your blood pressure is normal. Keep it up!")
+            fontLargestStrong['blood_pressure'].append("正常")
     else:
-        fontLargestStrong['blood_pressure'].append("No blood pressure data")
+        fontLargestStrong['blood_pressure'].append("沒有血壓資料")
 
     # 血糖建議
     if isinstance(blood_sugar, float):
@@ -68,9 +67,9 @@ def get_health_advice(blood_pressure_in, blood_pressure_out, blood_sugar, height
             fontNormalStrong['blood_sugar'].append("運動：空腹運動、過度運動等。")
             fontNormalStrong['blood_sugar'].append("如果長時間處於低血糖狀態，建議就醫。")
         else:
-            fontLargestStrong['blood_sugar'].append("Your blood sugar is normal. Keep it up!")
+            fontLargestStrong['blood_sugar'].append("正常")
     else:
-        fontLargestStrong['blood_sugar'].append("No blood sugar data")
+        fontLargestStrong['blood_sugar'].append("沒有血糖資料")
 
     # BMI 建議
     if isinstance(weight, float) and isinstance(height, float):
@@ -84,7 +83,7 @@ def get_health_advice(blood_pressure_in, blood_pressure_out, blood_sugar, height
         else:
             fontLargestStrong['bmi'].append(f"你的BMI為{bmi} -> 「體重過輕」，需要多運動，均衡飲食，以增加體能，維持健康！建議多攝取高熱量、高蛋白的食物，如堅果、酪梨、牛奶、豆類等。可以增加優質碳水化合物的攝取，如全穀類、燕麥、紅薯等，為身體提供足夠的能量。每天進行適量的力量訓練，如舉重或阻力訓練，增強肌肉，幫助體重增長。")
     else:
-        fontLargestStrong['bmi'].append("Not enough data to calculate your BMI")
+        fontLargestStrong['bmi'].append("沒有身高或體重資料")
 
     return fontLargestStrong, fontSecondStrong, fontNormalStrong, fontNormal
 
