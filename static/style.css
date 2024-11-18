@@ -9,7 +9,7 @@ body {
 
 .container {
     width: 100%;
-    max-width: 600px;
+    max-width: 1000px;
     text-align: center;
 }
 
@@ -45,7 +45,11 @@ button:hover {
 
 .flexbox {
     display: flex;
-    margin: 10px 0;
+    justify-content: center;
+}
+
+.gridbox {
+    display: grid;
 }
 
 .advice h2 {

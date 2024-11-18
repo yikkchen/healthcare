@@ -12,18 +12,21 @@
         <form method="POST" action="{{ url_for('result') }}">
             <div class="flexbox">
                 <label for="blood_pressure">收縮壓(mmHg):</label>
-                <input type="number" id="blood_presure_in" name="blood_presure_in" step="0.1">
+                <input type="number" id="blood_pressure_in" name="blood_pressure_in" step="0.1">
+                &ensp;&ensp;&ensp;&ensp;&ensp;
                 <label for="blood_pressure">舒張壓(mmHg):</label>
-                <input type="number" id="blood_presure_out" name="blood_presure_out" step="0.1">
+                <input type="number" id="blood_pressure_out" name="blood_pressure_out" step="0.1">
             </div>
 
-            <label for="blood_sugar">血糖(mg/dL):</label>
-            <input type="number" id="blood_sugar" name="blood_sugar" step="0.1">
+            <div class="gridbox">
+                <label for="blood_sugar">血糖(mg/dL):</label>
+                <input type="number" id="blood_sugar" name="blood_sugar" step="0.1">
+            </div>
 
             <div class="flexbox">
                 <label for="bmi">身高(cm):</label>
                 <input type="number" id="height" name="height" step="0.1">
-
+                
                 <label for="bmi">體重(kg):</label>
                 <input type="number" id="weight" name="weight" step="0.1">
             </div>
