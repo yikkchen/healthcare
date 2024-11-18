@@ -22,7 +22,7 @@ def get_health_advice(blood_pressure, blood_sugar, height, weight):
             fontNormalStrong['blood_pressure'].append("2.減重：維持理想體重，可減低體重過重所增加之心臟負荷。")
             fontNormalStrong['blood_pressure'].append("3.低鹽飲食：減少鈉鹽的攝取，可使血壓下降，飲食宜採清淡，盡量避免食用醃漬食物。")
             fontNormalStrong['blood_pressure'].append("4.控制飲酒：喝酒會使高血壓藥物失去療效。要避免血壓上升，飲酒量不宜超過30公克酒精。")
-            fontNormalStrong['blood_pressure'].append("5.規律運動：每天30分鐘，一個星期最好五次以上，做一些安全溫和的有氧運動，例如快走、慢跑、游泳、騎腳踏車等。")
+            fontNormalStrong['blood_pressure'].append("5.規律運動：每天30分鐘，一個星期最好五次以上，做一些安全溫和的有氧運動，可以改善血壓過高問題。")
         elif blood_pressure < 90:
             fontLargestStrong['blood_pressure'].append("血壓太低<90/60")
             fontSecondStrong['blood_pressure'].append("！注意！")
@@ -33,7 +33,7 @@ def get_health_advice(blood_pressure, blood_sugar, height, weight):
             fontNormalStrong['blood_pressure'].append("2.避免處在悶熱的環境：容易使血管舒張、血壓下降。")
             fontNormalStrong['blood_pressure'].append("3.避免穿著過緊的衣服或系過緊的領帶：容易壓迫到頸動脈竇，引起血壓驟降而昏倒。")
             fontNormalStrong['blood_pressure'].append("4.增加鹽分攝取：低血壓患者每天適量攝取約12克左右的食鹽，可改善低血壓症狀。")
-            fontNormalStrong['blood_pressure'].append("5.規律運動：運動可調節神經系統、增強心血管功能，進而改善低血壓症狀。")
+            fontNormalStrong['blood_pressure'].append("5.規律運動：運動可調節神經系統、增強心血管功能，進而改善血壓過低問題。")
         else:
             fontSecondStrong['blood_pressure'].append("正常：")
             fontLargestStrong['blood_pressure'].append("Your blood pressure is normal. Keep it up!")
