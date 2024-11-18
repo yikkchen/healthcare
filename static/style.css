@@ -77,3 +77,7 @@ button:hover {/*滑鼠停留在button上的顏色*/
     font-size: 0.9em;
     color: #333;
 }
+
+.advice-section {
+    margin-right: 20px;
+}

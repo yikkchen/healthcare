@@ -12,8 +12,7 @@ def get_health_advice(blood_pressure_in, blood_pressure_out, blood_sugar, height
     
     # 血壓建議
     if isinstance(blood_pressure_in, float) and isinstance(blood_pressure_out, float) :
-        blood_pressure = blood_pressure_in / blood_pressure_out
-        if blood_pressure > 120 / 80:
+        if blood_pressure_in > 120  or blood_pressure_out > 80:
             fontLargestStrong['blood_pressure'].append("血壓太高>120/80")
             fontSecondStrong['blood_pressure'].append("！注意！")
             fontNormalStrong['blood_pressure'].append("正常情況下，你的血壓應該為：")
@@ -24,7 +23,7 @@ def get_health_advice(blood_pressure_in, blood_pressure_out, blood_sugar, height
             fontNormalStrong['blood_pressure'].append("3.低鹽飲食：減少鈉鹽的攝取，可使血壓下降，飲食宜採清淡，盡量避免食用醃漬食物。")
             fontNormalStrong['blood_pressure'].append("4.控制飲酒：喝酒會使高血壓藥物失去療效。要避免血壓上升，飲酒量不宜超過30公克酒精。")
             fontNormalStrong['blood_pressure'].append("5.規律運動：每天30分鐘，一個星期最好五次以上，做一些安全溫和的有氧運動，可以改善血壓過高問題。")
-        elif blood_pressure < 90 / 60:
+        elif blood_pressure_in < 90 or  blood_pressure_out < 60:
             fontLargestStrong['blood_pressure'].append("血壓太低<90/60")
             fontSecondStrong['blood_pressure'].append("！注意！")
             fontNormalStrong['blood_pressure'].append("正常情況下，你的血壓應該為：")
@@ -35,10 +34,12 @@ def get_health_advice(blood_pressure_in, blood_pressure_out, blood_sugar, height
             fontNormalStrong['blood_pressure'].append("3.避免穿著過緊的衣服或系過緊的領帶：容易壓迫到頸動脈竇，引起血壓驟降而昏倒。")
             fontNormalStrong['blood_pressure'].append("4.增加鹽分攝取：低血壓患者每天適量攝取約12克左右的食鹽，可改善低血壓症狀。")
             fontNormalStrong['blood_pressure'].append("5.規律運動：運動可調節神經系統、增強心血管功能，進而改善血壓過低問題。")
+        elif blood_pressure_in > 120 and blood_pressure_out < 60 or blood_pressure_in < 90 and blood_pressure_out > 80:
+            fontLargestStrong['blood_pressure'].append("資訊輸入錯誤")
         else:
             fontLargestStrong['blood_pressure'].append("正常")
     else:
-        fontLargestStrong['blood_pressure'].append("沒有血壓資料")
+        fontLargestStrong['blood_pressure'].append("沒有輸入收縮壓及舒張壓")
 
     # 血糖建議
     if isinstance(blood_sugar, float):
