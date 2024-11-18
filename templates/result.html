@@ -104,7 +104,6 @@
                             </ul>
 
                         {% endfor %}
-<<<<<<< HEAD
                     </ul>
                     <ul class="font-second-strong">
                         {% for advice in fontSecondStrong.blood_sugar[:1] %}
@@ -131,17 +130,13 @@
                             <li>{{ advice }}</li>
                         {% endfor %}
                     </ul>
-=======
-                    </ul>  
-                    
-                    <!-- 加入了解 GI 值的按鈕 -->
-                    {% if '！注意！你的血糖高於正常範圍' in fontLargestStrong.blood_sugar[0] %}
-                        <div class="gi-link">
-                            <a href="{{ url_for('GI') }}" class="btn btn-info">點我了解GI值</a>
-                        </div>
-                    {% endif %}
->>>>>>> d1f9c8f6904daf050420439979a3caf5c54beb06
                 </div>
+                <!-- 加入了解 GI 值的按鈕 -->
+                {% if '！注意！你的血糖高於正常範圍' in fontLargestStrong.blood_sugar[0] %}
+                <div class="gi-link">
+                    <a href="{{ url_for('GI') }}" class="btn btn-info">點我了解GI值</a>
+                </div>
+                {% endif %}
             {% endif %}
         </div>
         
