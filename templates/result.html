@@ -36,6 +36,20 @@
                     <ul class="font-largest-strong">
                         {% for advice in fontLargestStrong.blood_pressure %}
                             <li><strong>{{ advice }}</strong></li>
+
+                            <ul class="font-second-strong">
+                                {% for advice in fontSecondStrong.blood_pressure %}
+                                    <li><strong>{{ advice }}</strong></li>
+
+                                    <ul class="font-normal-strong">
+                                        {% for advice in fontNormalStrong.blood_pressure %}
+                                            <li><strong>{{ advice }}</strong></li>
+                                        {% endfor %}
+                                    </ul>
+
+                                {% endfor %}
+                            </ul>
+
                         {% endfor %}
                     </ul>
                 </div>
