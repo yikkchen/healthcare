@@ -35,6 +35,20 @@
                     <ul class="font-largest-strong">
                         {% for advice in fontLargestStrong.blood_pressure %}
                             <li><strong>{{ advice }}</strong></li>
+
+                            <ul class="font-second-strong">
+                                {% for advice in fontSecondStrong.blood_pressure %}
+                                    <li><strong>{{ advice }}</strong></li>
+
+                                    <ul class="font-normal-strong">
+                                        {% for advice in fontNormalStrong.blood_pressure %}
+                                            <li><strong>{{ advice }}</strong></li>
+                                        {% endfor %}
+                                    </ul>
+
+                                {% endfor %}
+                            </ul>
+
                         {% endfor %}
                     </ul>
                     <ul class="font-second-strong">
@@ -73,7 +87,6 @@
             {% if fontLargestStrong.blood_sugar or fontSecondStrong.blood_sugar or fontNormalStrong.blood_sugar or fontNormal.blood_sugar %}
                 <div class="advice">
                     <ul class="font-largest-strong">
-                        {% for advice in fontLargestStrong.blood_sugar %}
                             <li><strong>{{ advice }}</strong></li>
                         {% endfor %}
                     </ul>
@@ -132,6 +145,16 @@
                             <li>{{ advice }}</li>
                         {% endfor %}
                     </ul>
+=======
+                    </ul>  
+                    
+                    <!-- 加入了解 GI 值的按鈕 -->
+                    {% if '！注意！你的血糖高於正常範圍' in fontLargestStrong.blood_sugar[0] %}
+                        <div class="gi-link">
+                            <a href="{{ url_for('GI') }}" class="btn btn-info">點我了解GI值</a>
+                        </div>
+                    {% endif %}
+>>>>>>> d1f9c8f6904daf050420439979a3caf5c54beb06
                 </div>
             {% endif %}
         </div>
