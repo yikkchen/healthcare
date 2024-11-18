@@ -118,6 +118,10 @@ def result():
 def GI():
     return render_template('GI.html')
 
+@app.route('/info', methods=['GET', 'POST'])
+def info():
+    return render_template('info.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
