@@ -50,8 +50,8 @@ def get_health_advice(blood_pressure_in, blood_pressure_out, blood_sugar, height
             fontNormalStrong['blood_sugar'].append("飯後兩小時血糖：70~140mg/dL")
             fontSecondStrong['blood_sugar'].append("！改善！")
             fontNormalStrong['blood_sugar'].append("1. 避免吃高升糖指數的食物，選擇 GI 值低於 55 的低升糖指數食物，例如：糙米、燕麥、山藥、大部分蔬菜、豆魚蛋肉類、小番茄、芭樂、木瓜等。")
-            fontNormalStrong['blood_sugar'].append("1. 避免吃含精緻糖的食物，像是冰糖、砂糖、高果糖漿等精製糖，避免食用麵包、冰淇淋、甜甜圈等含精緻糖的食物。")
-            fontNormalStrong['blood_sugar'].append("2. 避免吃高油脂食物，選擇植物油來替代動物性脂肪（如：豬油、牛油、奶油、培根等）。")
+            fontNormalStrong['blood_sugar'].append("2. 避免吃含精緻糖的食物，像是冰糖、砂糖、高果糖漿等精製糖，避免食用麵包、冰淇淋、甜甜圈等含精緻糖的食物。")
+            fontNormalStrong['blood_sugar'].append("3. 避免吃高油脂食物，選擇植物油來替代動物性脂肪（如：豬油、牛油、奶油、培根等）。")
             fontNormalStrong['blood_sugar'].append("4. 避免吃高鈉食物，並避免過度飲酒。")
         elif blood_sugar < 70:
             fontLargestStrong['blood_sugar'].append("血糖太低<70")
