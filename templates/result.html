@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Health Monitor</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <!-- 字體 （google front LXGW WenKai TC Static） -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC&display=swap" rel="stylesheet">
+
     <style>
         .back-home {
             margin-top: 20px;
@@ -28,7 +34,7 @@
         <h1>健康建議</h1>
 
         <!--血壓建議-->
-        <div class="flexbox">
+        <div class="advice-container">
             <div class="advice-section">
                 <h2>Blood Pressure:</h2>
                 {% if fontLargestStrong.blood_pressure or fontSecondStrong.blood_pressure or fontNormalStrong.blood_pressure or fontNormal.blood_pressure %}
