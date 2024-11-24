@@ -46,14 +46,14 @@ label, input, button {
 }
 
 button {
-    background-color: #2A9D8F;
+    background-color: #264653;
     color: white;
     border: none;
     cursor: pointer;
 }
 
 button:hover {/*滑鼠停留在button上的顏色*/
-    background-color: #264653;
+    background-color: #2A9D8F;
 }
 
 .advice {
