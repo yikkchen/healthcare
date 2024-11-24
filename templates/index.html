@@ -5,11 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Health Monitor</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <!-- 字體 （google front LXGW WenKai TC Static） -->
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC&display=swap" rel="stylesheet"> -->
+
 </head>
 <body>
-    <div class="container">
-        <h1>健康助手</h1>
+    <div class="upper_container">
+        <!-- <div class="upper_font"> -->
+            <strong>健康助手</strong>
+        <!-- </div> -->
+    </div>
+
+    <div class="lower_container">
         <form method="POST" action="{{ url_for('result') }}">
+
             <div class="flexbox">
                 <label for="blood_pressure">收縮壓(mmHg):</label>
                 <input type="number" id="blood_pressure_in" name="blood_pressure_in" step="0.1">
