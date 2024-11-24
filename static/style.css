@@ -69,11 +69,7 @@ form {
 
 label, input, button {
     margin: 10px 0;
-    /*邊距*/
-    /*垂直方向（上下邊距）為 10 像素（10px）。水平方向（左右邊距）為 0 像素（0）。*/
     padding: 10px;
-    /*內邊距*/
-    /*（上、下、左、右）的內邊距都為 10 像素。*/
 }
 
 button {
@@ -96,13 +92,31 @@ button:hover {/*滑鼠停留在button上的顏色*/
     padding: 0;
 }
 
-.flexbox {
+.aling_two_buttom {
     display: flex;
     justify-content: center;
+    gap: 20px;
 }
 
-.gridbox {
-    display: grid;
+.flexbox {
+    display: flex;
+    align-items: center; /* 使 label 和 input 垂直對齊 */
+    width: 100%;
+}
+
+.flexbox label {
+    margin-right: 10px; /* label 和 input 之間的間距 */
+    font-size: 1.2em;
+    font-family: "LXGW WenKai TC", cursive;
+}
+
+.flexbox input {
+    font-size: 1em;
+    font-family: "LXGW WenKai TC", cursive;
+    flex-grow: 1; /* 輸入框自動填滿剩餘的空間 */
+    padding: 8px;
+    border: 1px solid #ccc; /* 輸入框邊框 */
+    border-radius: 4px; /* 邊框圓角 */
 }
 
 .advice h2 {
