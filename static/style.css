@@ -1,180 +1,100 @@
-body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
+from flask import Flask, render_template, request, session, flash, redirect
+from models import db, User  # 匯入資料庫和使用者模型
+from auth import auth  # 匯入認證相關藍圖
+from main import main  # 匯入主頁藍圖
+from records import records  # 匯入記錄相關藍圖
 
-    font-family: Arial, sans-serif;
-    display: flex; /* 使用 Flexbox 佈局 */
-    flex-direction: column; /* 垂直排列子元素 */
-    align-items: center;
-    
-}
-@keyframes bounce {
-    0% {
-        transform: translateY(0);
-    }
-    30% {
-        transform: translateY(-10px); /* 向上移動 */
-    }
-    50% {
-        transform: translateY(0); /* 回到原來位置 */
-    }
-    70% {
-        transform: translateY(-5px); /* 輕微向上移動 */
-    }
-    100% {
-        transform: translateY(0); /* 最終回到原來位置 */
-    }
-}
-.anime-text {
-    animation: bounce 1s ease forwards; /* 動畫只執行一次，並保持在結束狀態 */
-}
-.upper_container{
-    width: 100%;
-    height: 200px;
-    padding-bottom: 50px;
+app = Flask(__name__)
 
-    /*背景*/
-    /* background-color: lightgray; */
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    /* 到時候放一張看起來很健康，綠色色調的圖 */
-    background-image: url('https://www.mattpaynephotography.com/images/xl/Preventative-MedicineFebruary-05-2020.webp');
-    
-    display: flex;
-    flex-direction: column;  /* 垂直排列子元素 */
-    justify-content: flex-end;  /* 將內容對齊到底部 */
-    text-align: center;
-    color: #ffffff;
-    font-size: 3.5em;
-    font-weight: bold;
+# 基本配置
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
+app.secret_key = '你的密鑰'
 
-}
+# 初始化資料庫
+db.init_app(app)
 
-/* .upper_font {
-    font-size: 3.0em;
-    color: #ffffff;
-    text-align: center;
-} */
+# 註冊藍圖
+app.register_blueprint(auth, url_prefix='/auth')  # 登入、註冊、登出相關
+app.register_blueprint(main, url_prefix='/')  # 主頁相關
+app.register_blueprint(records, url_prefix='/records')  # 健康紀錄相關
 
-.lower_container {
-    width: 100%;
-    max-width: 1200px;
-    text-align: center;
-}
+# 初始化資料庫表
+with app.app_context():
+    db.create_all()
 
-/*左中右那三大塊*/
-.advice-container {
-    display: flex;
-    justify-content: space-between; /* 或者使用 space-evenly */
-    gap: 20px; /* 建議之間的間距 */
-}
+# 健康建議函數
+def get_health_advice(blood_pressure_in, blood_pressure_out, blood_sugar, height, weight):
+    fontLargestStrong = {'blood_pressure': [], 'blood_sugar': [], 'bmi': []}
+    fontSecondStrong = {'blood_pressure': [], 'blood_sugar': [], 'bmi': []}
+    fontNormalStrong = {'blood_pressure': [], 'blood_sugar': [], 'bmi': []}
+    fontNormal = {'blood_pressure': [], 'blood_sugar': [], 'bmi': []}
 
-.advice-section {
-    flex: 1; /* 每個子項目分配相同的空間 */
-    padding: 20px;
-    background-color: #c0ddea; /* 可選：設置背景色以區分 */
-    /* border: 1px solid #ccc; 可選：加邊框 */
-    box-sizing: border-box; /* 確保 padding 不影響寬度計算 */
-    height: 570px; /* 固定高度 */
-    overflow: auto; /* 如果內容超過高度，允許滾動 */
-}
+    # 血壓建議
+    if blood_pressure_in is not None and blood_pressure_out is not None:
+        if blood_pressure_in > 120 or blood_pressure_out > 80:
+            fontLargestStrong['blood_pressure'].append("血壓太高>120/80")
+            fontNormalStrong['blood_pressure'].append("建議調整飲食，低鹽飲食、多運動、減少壓力。")
+        elif blood_pressure_in < 90 or blood_pressure_out < 60:
+            fontLargestStrong['blood_pressure'].append("血壓太低<90/60")
+            fontNormalStrong['blood_pressure'].append("建議多喝水、增加鹽分攝取，避免過度疲勞。")
+        else:
+            fontLargestStrong['blood_pressure'].append("血壓正常")
 
-form {
-    display: flex;
-    flex-direction: column;
-}
+    # 血糖建議
+    if blood_sugar is not None:
+        if blood_sugar > 140:
+            fontLargestStrong['blood_sugar'].append("血糖太高>140")
+            fontNormalStrong['blood_sugar'].append("建議避免高糖食物，規律運動，並監控血糖。")
+        elif blood_sugar < 70:
+            fontLargestStrong['blood_sugar'].append("血糖太低<70")
+            fontNormalStrong['blood_sugar'].append("建議多吃高纖維食物，避免空腹過久。")
+        else:
+            fontLargestStrong['blood_sugar'].append("血糖正常")
 
-label, input, button {
-    margin: 10px 0;
-    padding: 10px;
-}
+    # BMI 建議
+    if height is not None and weight is not None:
+        bmi = round(weight / (height / 100) ** 2, 2)
+        if bmi >= 27:
+            fontLargestStrong['bmi'].append(f"肥胖 (BMI={bmi})")
+            fontNormalStrong['bmi'].append("建議減重，規律運動，控制飲食。")
+        elif 24 <= bmi < 27:
+            fontLargestStrong['bmi'].append(f"體重過重 (BMI={bmi})")
+            fontNormalStrong['bmi'].append("建議控制熱量攝取，增加運動量。")
+        elif 18.5 <= bmi < 24:
+            fontLargestStrong['bmi'].append(f"正常體重 (BMI={bmi})")
+            fontNormalStrong['bmi'].append("繼續保持健康的生活方式。")
+        else:
+            fontLargestStrong['bmi'].append(f"體重過輕 (BMI={bmi})")
+            fontNormalStrong['bmi'].append("建議增加飲食熱量，適量運動以增強體質。")
 
-button {
-    background-color: #264653;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
+    return fontLargestStrong, fontSecondStrong, fontNormalStrong, fontNormal
 
-button:hover {/*滑鼠停留在button上的顏色*/
-    background-color: #2A9D8F;
-}
+# 主頁面
+@app.route('/', methods=['GET'])
+def index():
+    return render_template('index.html')
 
-.advice {
-    margin-top: 20px;
-}
+# 結果頁面
+@app.route('/result', methods=['POST'])
+def result():
+    blood_pressure_in = float(request.form.get('blood_pressure_in', 0))
+    blood_pressure_out = float(request.form.get('blood_pressure_out', 0))
+    blood_sugar = float(request.form.get('blood_sugar', 0))
+    height = float(request.form.get('height', 0))
+    weight = float(request.form.get('weight', 0))
 
-.advice ul {
-    list-style-type: none;
-    padding: 0;
-}
+    advice = get_health_advice(blood_pressure_in, blood_pressure_out, blood_sugar, height, weight)
+    return render_template('result.html', advice=advice)
 
-.aling_two_buttom {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-}
+# GI值介紹頁面
+@app.route('/GI')
+def GI():
+    return render_template('GI.html')
 
-.flexbox {
-    display: flex;
-    align-items: center; /* 使 label 和 input 垂直對齊 */
-    width: 100%;
-}
+# 健康資訊輸入頁面
+@app.route('/info', methods=['GET', 'POST'])
+def info():
+    return render_template('info.html')
 
-.flexbox label {
-    margin-right: 10px; /* label 和 input 之間的間距 */
-    font-size: 1.2em;
-    font-family: "LXGW WenKai TC", cursive;
-}
-
-.flexbox input {
-    font-size: 1em;
-    font-family: "LXGW WenKai TC", cursive;
-    flex-grow: 1; /* 輸入框自動填滿剩餘的空間 */
-    padding: 8px;
-    border: 1px solid #ccc; /* 輸入框邊框 */
-    border-radius: 4px; /* 邊框圓角 */
-}
-
-.advice h2 {
-    color: #333;
-}
-
-.font-largest-strong li {
-    font-size: 1.2em;
-    color: #264653;
-}
-
-.font-second-strong li {
-    /* google找的字體 */
-    font-family: "LXGW WenKai TC", cursive;
-    font-weight: 400;
-    font-style: normal;
-
-    font-size: 1.1em;
-    color: #ffffff;
-    background-color: #264653; 
-}
-
-.font-normal-strong li {
-    /* google找的字體 */
-    font-family: "LXGW WenKai TC", cursive;
-    font-weight: 400;
-    font-style: normal;
-
-    font-size: 1em;
-    color: #000000;
-    /* font-style: italic; 如果要斜體*/
-    text-align: left;
-}
-
-.font-normal li {
-    font-size: 0.9em;
-    color: #333;
-}
-
-/* .advice-section {
-    margin-right: 20px;
-} */
+if __name__ == '__main__':
+    app.run(debug=True)
