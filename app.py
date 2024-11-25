@@ -77,16 +77,23 @@ def get_health_advice(blood_pressure_in, blood_pressure_out, blood_sugar, height
         bmi = round(weight / (height / 100) ** 2, 2)
         if bmi >= 27:
             fontLargestStrong['bmi'].append(f"你的BMI為{bmi} -> 啊～「肥胖」，需要立刻力行「健康體重管理」囉！建議減少高脂肪、高糖食物的攝取，如甜點、油炸食物、含糖飲料等。多選擇富含纖維的食物，例如蔬菜、水果和全穀類，有助於增加飽足感。增加有氧運動，如快走、慢跑或騎自行車，每週至少進行150分鐘，幫助燃燒熱量。每餐適量控制，避免暴飲暴食，並養成規律的飲食習慣，避免宵夜。")
+            fontSecondStrong['bmi'].append("！注意！肥胖會增加心血管疾病、糖尿病等慢性病風險，請立即採取行動！")
         elif 24 <= bmi < 27:
-            fontLargestStrong['bmi'].append(f"你的BMI為{bmi} -> 「體重過重」了，要小心囉，趕快力行「健康體重管理」！建議控制每天的總熱量攝取，減少高熱量食物如糕點、含糖飲料等。可以考慮多吃高蛋白低脂肪的食物，如魚、豆類、瘦肉等，有助於保持肌肉質量。每天堅持運動，如散步、快走、爬樓梯等，逐步養成運動習慣。")
+            fontLargestStrong['bmi'].append(f"你的BMI為{bmi} -> 「體重過重」，要小心囉，趕快力行「健康體重管理」！建議控制每天的總熱量攝取，減少高熱量食物如糕點、含糖飲料等。可以考慮多吃高蛋白低脂肪的食物，如魚、豆類、瘦肉等，有助於保持肌肉質量。每天堅持運動，如散步、快走、爬樓梯等，逐步養成運動習慣。避免久坐，建議每隔一段時間起身活動，讓身體保持活力。")
+            fontSecondStrong['bmi'].append("！注意！體重過重可能帶來健康問題，建議調整生活方式。")
         elif 18.5 <= bmi < 24:
-            fontLargestStrong['bmi'].append(f"你的BMI為{bmi} -> 恭喜！「健康體重」，要繼續保持！可以繼續保持現在的飲食和運動習慣。建議選擇均衡飲食，包含蛋白質、碳水化合物、健康脂肪以及維生素和礦物質，確保營養充足。保持每週的運動頻率，如散步、瑜伽、慢跑等，讓身體保持健康活力。")
+            fontLargestStrong['bmi'].append(f"你的BMI為{bmi} -> 恭喜！「健康體重」，要繼續保持！建議選擇均衡飲食，包含蛋白質、碳水化合物、健康脂肪以及維生素和礦物質，確保營養充足。保持每週的運動頻率，如散步、瑜伽、慢跑等，讓身體保持健康活力。定期檢查體重，以便及時調整生活習慣，防止體重波動。")
+            fontSecondStrong['bmi'].append("！注意！雖然健康，但仍需保持良好的生活習慣！")
         else:
-            fontLargestStrong['bmi'].append(f"你的BMI為{bmi} -> 「體重過輕」，需要多運動，均衡飲食，以增加體能，維持健康！建議多攝取高熱量、高蛋白的食物，如堅果、酪梨、牛奶、豆類等。可以增加優質碳水化合物的攝取，如全穀類、燕麥、紅薯等，為身體提供足夠的能量。每天進行適量的力量訓練，如舉重或阻力訓練，增強肌肉，幫助體重增長。")
+            fontLargestStrong['bmi'].append(f"你的BMI為{bmi} -> 「體重過輕」，需要多運動，均衡飲食，以增加體能，維持健康！可以增加優質碳水化合物的攝取，如全穀類、燕麥、紅薯等，為身體提供足夠的能量。每天進行適量的力量訓練，如舉重或阻力訓練，增強肌肉，幫助體重增長。確保攝取足夠的營養，多吃健康的點心，如水果乾、酸奶、花生醬夾心麵包等。")
+            fontSecondStrong['bmi'].append("！注意！體重過輕可能導致營養不良和免疫力下降，請關注健康！")
     else:
         fontLargestStrong['bmi'].append("沒有身高或體重資料")
+        fontSecondStrong['bmi'].append("！注意！請完整輸入數據以獲得準確的建議！")
+
 
     return fontLargestStrong, fontSecondStrong, fontNormalStrong, fontNormal
+
 
 # 主頁面路由
 @app.route('/', methods=['GET', 'POST'])
